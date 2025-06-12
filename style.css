@@ -1,81 +1,110 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* RINTIS Arah Dark Modern Adventure CSS */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap');
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background: #0d1b2a;
-  color: #e0e1dd;
-  line-height: 1.6;
+  font-family: 'Barlow Condensed', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #0f1b1b;
+  color: #e0f2f1;
 }
 
-.header {
-  background: #1b263b;
+/* Preloader */
+#preloader {
+  background: #0f1b1b;
+  color: #a5d6a7;
+  font-size: 1.5rem;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOut 1s 2.5s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+header {
+  background: #1b4332;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #ffd60a;
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+  letter-spacing: 2px;
 }
 
 nav a {
-  color: #e0e1dd;
-  text-decoration: none;
+  color: #e0f2f1;
   margin: 0 1rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 nav a:hover {
-  color: #ffd60a;
-}
-
-.controls select, .controls button, input[type="text"] {
-  padding: 0.4rem 0.6rem;
-  border-radius: 8px;
-  border: none;
-  font-size: 1rem;
-  background: #415a77;
-  color: #fff;
-  margin-left: 0.5rem;
-}
-
-main {
-  padding: 2rem 1rem;
-  max-width: 1200px;
-  margin: auto;
+  color: #ffd166;
 }
 
 .frame {
-  background: #1b263b;
-  border-left: 5px solid #ffd60a;
-  border-radius: 10px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  animation: fadeUp 0.8s ease-in-out;
+  background: #1b1b1b;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  animation: fadeUp 0.8s ease-in;
 }
 
 @keyframes fadeUp {
-  0% {
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+input[type="text"], textarea, select {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background: #263238;
+  color: #fff;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  background: #388e3c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #43a047;
 }
 
 .gallery-container {
@@ -87,56 +116,51 @@ main {
 .gallery-item {
   width: 160px;
   text-align: center;
-  cursor: pointer;
 }
 
 .gallery-item img {
   width: 100%;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
+  border-radius: 12px;
+  transition: transform 0.3s;
 }
 
 .gallery-item:hover img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-.video-container iframe {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-}
-
-footer.footer {
-  background: #1b263b;
-  color: #e0e1dd;
+footer {
   text-align: center;
   padding: 1rem;
+  background: #1b4332;
+  color: white;
+  font-size: 0.9rem;
 }
 
-/* Preloader */
-#preloader {
-  background: #0d1b2a;
-  color: #ffd60a;
+.modal {
+  display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 2000;
-  font-size: 1.5rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.9);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  nav {
-    margin-top: 0.5rem;
-  }
-  .gallery-item {
-    width: 100%;
-  }
+.modal .close {
+  color: #fff;
+  font-size: 2rem;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.modal img {
+  display: block;
+  margin: auto;
+  max-width: 80%;
+  max-height: 80vh;
+  margin-top: 5rem;
 }
