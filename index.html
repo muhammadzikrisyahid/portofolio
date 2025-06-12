@@ -1,93 +1,121 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RINTIS Arah - Eksplorasi Alam</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RINTIS Arah - Komunitas Pecinta Alam</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Opening Screen -->
-  <div id="opening-screen" class="opening">
-    <h1>Selamat Datang di <span class="highlight">RINTIS ARAH</span></h1>
-    <p>Komunitas Pecinta Alam dan Pendaki Gunung</p>
-    <button onclick="startSite()">Masuk</button>
+  <!-- Preloader -->
+  <div id="preloader">
+    <h1>RINTIS Arah</h1>
+    <p>Menemukan Arah Lewat Jejak</p>
   </div>
 
-  <!-- Main Content Wrapper -->
-  <div id="main-content" class="hidden">
-    <!-- Header & Navigation -->
-    <header class="navbar">
-      <div class="logo">RINTIS ARAH</div>
-      <nav>
-        <ul>
-          <li><a href="#beranda">Beranda</a></li>
-          <li><a href="#galeri">Galeri</a></li>
-          <li><a href="#video">Video</a></li>
-          <li><a href="#visi">Visi & Misi</a></li>
-        </ul>
-      </nav>
-      <div class="controls">
-        <select id="languageSelect" onchange="switchLanguage(this.value)">
-          <option value="id">🇮🇩</option>
-          <option value="en">🇬🇧</option>
-        </select>
-        <button id="toggleTheme">🌙</button>
-      </div>
-    </header>
+  <!-- Header -->
+  <header class="main-header">
+    <h1 class="logo">RINTIS Arah</h1>
+    <nav>
+      <ul>
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#form-cerita">Cerita</a></li>
+      </ul>
+    </nav>
+    <div class="search-container">
+      <input type="text" id="unifiedSearch" placeholder="Cari gunung, simaksi, cuaca...">
+      <button onclick="handleSearch()">🔍</button>
+    </div>
+    <div class="controls">
+      <select id="languageSelect" onchange="switchLanguage(this.value)">
+        <option value="id">🇮🇩</option>
+        <option value="en">🇺🇸</option>
+      </select>
+      <button id="toggleTheme">🌙</button>
+    </div>
+  </header>
 
-    <!-- Pencarian Terintegrasi -->
-    <section class="frame fade-in" id="pencarian">
-      <h2>Cari Informasi Gunung</h2>
-      <input type="text" id="searchInput" placeholder="Masukkan nama gunung..." />
-      <button onclick="searchAll()">🔍 Cari</button>
-      <div id="searchResults"></div>
+  <main>
+    <!-- Visi Misi -->
+    <section class="frame animate" id="beranda">
+      <h2>Selamat Datang di Rintis Arah</h2>
+      <p>Komunitas Pecinta Alam dan Pendaki Gunung</p>
+      <p>Kami hadir untuk menginspirasi dan mengajak kamu menjelajahi alam dengan penuh semangat dan rasa tanggung jawab.</p>
+      <div class="visi-misi">
+        <div>
+          <h3>Visi</h3>
+          <p>Membangun ruang tumbuh dan pulang bagi jiwa-jiwa muda...</p>
+        </div>
+        <div>
+          <h3>Misi</h3>
+          <ul>
+            <li>Merawat alam adalah merawat diri</li>
+            <li>Perjalanan mencipta makna</li>
+            <li>Komunitas yang tulus dan tumbuh</li>
+            <li>Mengubah cerita menjadi gerak</li>
+            <li>Menjadi generasi yang peduli dan peka</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <!-- Visi Misi -->
-    <section class="frame fade-in" id="visi">
-      <h2>Visi</h2>
-      <p>Membangun ruang tumbuh dan pulang bagi jiwa-jiwa muda yang mencari arah—melalui jejak, jeda, dan perjalanan yang bermakna.</p>
-      <h2>Misi</h2>
-      <ul>
-        <li>Merawat alam adalah merawat diri.</li>
-        <li>Perjalanan mencipta makna yang membentuk karakter.</li>
-        <li>Komunitas yang tulus dan terus tumbuh.</li>
-        <li>Mengubah cerita menjadi gerak lewat dokumentasi.</li>
-        <li>Menjadi generasi yang peduli dan peka.</li>
-      </ul>
+    <!-- Info Dinamis -->
+    <section class="frame animate" id="infoSection">
+      <h2>Informasi Gunung</h2>
+      <div id="mountainInfo"></div>
+      <div id="simaksiResult"></div>
+      <div id="weatherResult"></div>
+      <div id="transportResult"></div>
     </section>
 
     <!-- Galeri -->
-    <section class="frame fade-in" id="galeri">
+    <section class="frame animate" id="galeri">
       <h2>Galeri Gunung</h2>
-      <div class="gallery-container">
+      <div class="gallery">
         <div class="gallery-item" onclick="openSlider('merbabu')">
-          <img src="images/merbabu/1.jpg" alt="Merbabu" />
+          <img src="images/merbabu/1.jpg" alt="Merbabu">
           <p>Merbabu</p>
         </div>
         <div class="gallery-item" onclick="openSlider('rinjani')">
-          <img src="images/rinjani/1.jpg" alt="Rinjani" />
+          <img src="images/rinjani/1.jpg" alt="Rinjani">
           <p>Rinjani</p>
         </div>
       </div>
     </section>
 
     <!-- Video -->
-    <section class="frame fade-in" id="video">
+    <section class="frame animate" id="video">
       <h2>Video Dokumentasi</h2>
       <div class="video-container">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <p id="visitorCount">👣 Jumlah pengunjung: 0</p>
-      <p>© 2025 Rintis Arah</p>
-    </footer>
-  </div>
+    <!-- Cerita Pendakian -->
+    <section class="frame animate" id="form-cerita">
+      <h2>Bagikan Cerita Pendakianmu</h2>
+      <form id="storyForm">
+        <input type="text" placeholder="Nama kamu" required>
+        <textarea placeholder="Ceritakan pengalaman mendakimu..." required></textarea>
+        <button type="submit">Kirim Cerita</button>
+      </form>
+    </section>
+
+    <!-- Map -->
+    <section class="frame animate">
+      <h2>Peta Lokasi Gunung</h2>
+      <div id="mapContainer"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Rintis Arah. Menemukan arah lewat jejak.</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
