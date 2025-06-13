@@ -1,107 +1,116 @@
-window.addEventListener("DOMContentLoaded", () => {
-  // === Terjemahan ===
-  const translations = {
-    en: {
-      welcome: "Welcome to Rintis Arah",
-      community: "Nature Lovers & Hikers Community",
-      shareStory: "Share Your Hiking Story",
-      info: "Mountain Info",
-      gallery: "Mountain Gallery",
-      video: "Video Documentation",
-      notfound: "Mountain not found. Try 'merbabu' or 'rinjani'."
-    },
-    id: {
-      welcome: "Selamat Datang di Rintis Arah",
-      community: "Komunitas Pecinta Alam dan Pendaki Gunung",
-      shareStory: "Bagikan Cerita Pendakianmu",
-      info: "Informasi Gunung",
-      gallery: "Galeri Gunung",
-      video: "Video Dokumentasi",
-      notfound: "Gunung tidak ditemukan. Coba ketik 'merbabu' atau 'rinjani'."
-    }
-  };
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RINTIS Arah - Komunitas Pecinta Alam</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="preloader">
+    <h1>RINTIS Arah</h1>
+    <p>Menemukan Arah Lewat Jejak</p>
+  </div>
 
-  // === Ambil Data Gunung dari JSON ===
-  let mountainData = {};
-  fetch('mountains.json')
-    .then(res => res.json())
-    .then(data => mountainData = data);
+  <header class="main-header">
+    <h1 class="logo">RINTIS Arah</h1>
+    <button class="hamburger" id="hamburger">&#9776;</button>
+    <nav id="navMenu">
+      <ul>
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#tentang">Tentang Kami</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#form-cerita">Cerita</a></li>
+      </ul>
+    </nav>
+    <div class="search-container">
+      <input type="text" id="unifiedSearch" placeholder="Cari gunung, simaksi, cuaca..." />
+      <button onclick="handleSearch()">🔍</button>
+    </div>
+    <div class="controls">
+      <select id="languageSelect">
+        <option value="id">🇮🇩</option>
+        <option value="en">🇺🇸</option>
+      </select>
+      <button id="toggleTheme">🌙</button>
+    </div>
+  </header>
 
-  let currentLang = "id";
+  <main>
+    <section class="frame animate" id="beranda">
+      <h2>Selamat Datang di Rintis Arah</h2>
+      <p>Komunitas Pecinta Alam dan Pendaki Gunung</p>
+    </section>
 
-  // === Ganti Bahasa ===
-  function switchLanguage(lang) {
-    currentLang = lang;
-    document.querySelector("#beranda h2").textContent = translations[lang].welcome;
-    document.querySelector("#beranda p").textContent = translations[lang].community;
-    document.querySelector("#infoSection h2").textContent = translations[lang].info;
-    document.querySelector("#galeri h2").textContent = translations[lang].gallery;
-    document.querySelector("#video h2").textContent = translations[lang].video;
-    document.querySelector("#form-cerita h2").textContent = translations[lang].shareStory;
-    handleSearch();
-  }
+    <section class="frame animate" id="tentang">
+      <h2>Tentang Kami</h2>
+      <p>Rintis Arah adalah komunitas pecinta alam yang menjelajah gunung dengan tanggung jawab dan cinta lingkungan. Kami berfokus pada edukasi, pelestarian, dan perjalanan penuh makna.</p>
+      <h3>Visi</h3>
+      <p>Visi
+Membangun ruang tumbuh dan pulang bagi jiwa-jiwa muda yang mencari arah—melalui jejak, jeda, dan perjalanan yang bermakna.</p>
+      <h3>Misi</h3>
+     <p>Misi
 
-  // === Cari Gunung ===
-  function handleSearch(query = null) {
-    const input = query || document.getElementById("unifiedSearch").value.trim().toLowerCase();
-    const infoBox = document.getElementById("mountainInfo");
-    const simaksiBox = document.getElementById("simaksiResult");
-    const weatherBox = document.getElementById("weatherResult");
-    const transportBox = document.getElementById("transportResult");
+Kami percaya bahwa merawat alam adalah merawat diri, karena menjaga lingkungan bukan sekadar aksi, melainkan cara untuk menyembuhkan dan menyadarkan diri. Melalui setiap perjalanan dan ekspedisi, kami mencipta makna yang membentuk perspektif dan karakter. Kami menghidupkan komunitas yang tulus dan terus tumbuh, di mana perbedaan dirayakan, cerita dibagikan, dan teman menjadi keluarga. Dengan mengubah cerita menjadi gerak lewat dokumentasi, kami menyuarakan nilai, membangun kesadaran, dan menginspirasi perubahan. Sebagai generasi yang peduli dan peka terhadap alam, sesama, dan suara hati, kami yakin bahwa perubahan besar selalu berawal dari kesadaran kecil.</p>
+    </section>
 
-    const result = mountainData[input];
-    if (result) {
-      const content = result[currentLang];
-      infoBox.textContent = content.info;
-      simaksiBox.textContent = content.simaksi;
-      weatherBox.textContent = content.weather;
-      transportBox.textContent = content.transport;
-    } else {
-      infoBox.textContent = translations[currentLang].notfound;
-      simaksiBox.textContent = weatherBox.textContent = transportBox.textContent = "";
-    }
-  }
+    <section class="frame animate" id="infoSection">
+      <h2>Informasi Gunung</h2>
+      <div id="mountainInfo"></div>
+      <div id="simaksiResult"></div>
+      <div id="weatherResult"></div>
+      <div id="transportResult"></div>
+      <div id="mapContainer"></div>
+    </section>
 
-  // === Klik Galeri ===
-  function searchFromGallery(gunung) {
-    document.getElementById("unifiedSearch").value = gunung;
-    handleSearch(gunung);
-  }
+    <section class="frame animate" id="galeri">
+      <h2>Galeri Gunung</h2>
+      <div class="slideshow-container">
+        <div class="mySlides fade">
+          <img src="https://source.unsplash.com/800x400/?merbabu,mountain" style="width:100%">
+        </div>
+        <div class="mySlides fade">
+          <img src="https://source.unsplash.com/800x400/?rinjani,mountain" style="width:100%">
+        </div>
+        <div class="mySlides fade">
+          <img src="https://source.unsplash.com/800x400/?semeru,mountain" style="width:100%">
+        </div>
+      </div>
+    </section>
 
-  // === Event Listener ===
-  document.getElementById("unifiedSearch").addEventListener("keydown", e => {
-    if (e.key === "Enter") handleSearch();
-  });
+    <section class="frame animate" id="video">
+      <h2>Video Dokumentasi</h2>
+      <div class="video-container">
+        <iframe width="100%" height="315" src="https://youtu.be/VOL5e9zGQrA?si=o5ag_ykZ57S5QxLt" allowfullscreen></iframe>
+      </div>
+       <div class="video-container">
+        <iframe width="100%" height="315" src="https://youtu.be/zwFTTr6OL98?si=_g1pX9jMy2oiwCZ-" allowfullscreen></iframe>
+      </div>
+    </section>
 
-  document.getElementById("toggleTheme").addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
-    document.getElementById("toggleTheme").textContent =
-      document.body.classList.contains("light-mode") ? "🌞" : "🌙";
-  });
+    <section class="frame animate" id="form-cerita">
+      <h2>Bagikan Cerita Pendakianmu</h2>
+      <form id="storyForm">
+        <input type="text" name="nama" placeholder="Nama kamu" required />
+        <textarea name="cerita" placeholder="Ceritakan pengalaman mendakimu..." required></textarea>
+        <button type="submit">Kirim Cerita</button>
+      </form>
+    </section>
 
-  document.getElementById("languageSelect").addEventListener("change", (e) => {
-    switchLanguage(e.target.value);
-  });
+    <section class="frame animate" id="visitor">
+      <h2>Jumlah Pengunjung</h2>
+      <div style="text-align:center;">
+        <img src="https://hitwebcounter.com/counter/counter.php?page=1234567&style=0036&nbdigits=5&type=page&initCount=0" alt="web counter" />
+      </div>
+    </section>
+  </main>
 
-  document.getElementById("hamburger").addEventListener("click", () => {
-    document.getElementById("navMenu").classList.toggle("show");
-  });
+  <footer>
+    <p>© 2025 Rintis Arah. Menemukan arah lewat jejak.</p>
+  </footer>
 
-  document.getElementById("storyForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Cerita kamu berhasil dikirim!");
-    e.target.reset();
-  });
-
-  // === Buat Fungsi Global ===
-  window.searchFromGallery = searchFromGallery;
-  window.handleSearch = handleSearch;
-
-  // === Preloader ===
-  const preloader = document.getElementById("preloader");
-  if (preloader) {
-    window.addEventListener("load", () => {
-      preloader.style.display = "none";
-    });
-  }
-});
+  <script src="script.js"></script>
+</body>
+</html>
