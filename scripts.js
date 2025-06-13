@@ -1,4 +1,3 @@
-// ======= DATA TRANSLASI ============
 const translations = {
   en: {
     welcome: "Welcome to Rintis Arah",
@@ -20,26 +19,6 @@ const translations = {
   }
 };
 
-let currentLang = "id"; // default bahasa
-
-function switchLanguage(lang) {
-  currentLang = lang;
-
-  document.querySelector("#beranda h2").textContent = translations[lang].welcome;
-  document.querySelector("#beranda p").textContent = translations[lang].community;
-  document.querySelector("#infoSection h2").textContent = translations[lang].info;
-  document.querySelector("#galeri h2").textContent = translations[lang].gallery;
-  document.querySelector("#video h2").textContent = translations[lang].video;
-  document.querySelector("#form-cerita h2").textContent = translations[lang].shareStory;
-
-  // Refresh data pencarian jika sudah pernah dicari
-  const currentQuery = document.getElementById("unifiedSearch").value.trim().toLowerCase();
-  if (currentQuery) {
-    handleSearch(currentQuery);
-  }
-}
-
-// ========== DATA GUNUNG ============
 const mountainData = {
   merbabu: {
     id: {
@@ -49,29 +28,41 @@ const mountainData = {
       transport: "Dari Boyolali, lanjut ke Selo via ojek atau angkot."
     },
     en: {
-      info: "Mount Merbabu is a stratovolcano located in Central Java.",
-      simaksi: "Permit can be handled online or directly at Selo basecamp.",
+      info: "Mount Merbabu is a stratovolcano in Central Java.",
+      simaksi: "Permit available online or at Selo basecamp.",
       weather: "Clear weather, around 15°C.",
-      transport: "From Boyolali, continue to Selo via motorcycle taxi or public minibus."
+      transport: "From Boyolali to Selo via ojek or minibus."
     }
   },
   rinjani: {
     id: {
-      info: "Gunung Rinjani adalah gunung tertinggi kedua di Indonesia, terletak di Lombok.",
-      simaksi: "Simaksi bisa diakses melalui Sembalun atau Senaru.",
+      info: "Gunung Rinjani adalah gunung tertinggi kedua di Indonesia.",
+      simaksi: "Simaksi bisa melalui Sembalun atau Senaru.",
       weather: "Cerah berawan, suhu sekitar 12°C.",
-      transport: "Dari Mataram ke Sembalun via mobil sewaan atau bus kecil."
+      transport: "Dari Mataram ke Sembalun dengan mobil atau bus kecil."
     },
     en: {
-      info: "Mount Rinjani is Indonesia’s second highest volcano, located in Lombok.",
-      simaksi: "Permit can be accessed via Sembalun or Senaru route.",
-      weather: "Partly cloudy, around 12°C.",
-      transport: "From Mataram to Sembalun by rental car or minibus."
+      info: "Mount Rinjani is Indonesia’s second highest volcano.",
+      simaksi: "Permits via Sembalun or Senaru.",
+      weather: "Partly cloudy, 12°C.",
+      transport: "From Mataram to Sembalun by car or minibus."
     }
   }
 };
 
-// ========== CARI GUNUNG ============
+let currentLang = "id";
+
+function switchLanguage(lang) {
+  currentLang = lang;
+  document.querySelector("#beranda h2").textContent = translations[lang].welcome;
+  document.querySelector("#beranda p").textContent = translations[lang].community;
+  document.querySelector("#infoSection h2").textContent = translations[lang].info;
+  document.querySelector("#galeri h2").textContent = translations[lang].gallery;
+  document.querySelector("#video h2").textContent = translations[lang].video;
+  document.querySelector("#form-cerita h2").textContent = translations[lang].shareStory;
+  handleSearch();
+}
+
 function handleSearch(query = null) {
   const input = query || document.getElementById("unifiedSearch").value.trim().toLowerCase();
   const infoBox = document.getElementById("mountainInfo");
@@ -80,7 +71,6 @@ function handleSearch(query = null) {
   const transportBox = document.getElementById("transportResult");
 
   const result = mountainData[input];
-
   if (result) {
     const content = result[currentLang];
     infoBox.textContent = content.info;
@@ -89,21 +79,19 @@ function handleSearch(query = null) {
     transportBox.textContent = content.transport;
   } else {
     infoBox.textContent = translations[currentLang].notfound;
-    simaksiBox.textContent = "";
-    weatherBox.textContent = "";
-    transportBox.textContent = "";
+    simaksiBox.textContent = weatherBox.textContent = transportBox.textContent = "";
   }
 }
 
-// ========== ENTER UNTUK CARI ============
-document.getElementById("unifiedSearch").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    handleSearch();
-  }
-});
-
-// ========== KLIK GALERI ============
 function searchFromGallery(gunung) {
   document.getElementById("unifiedSearch").value = gunung;
-  handleSearch(gunung.toLowerCase());
+  handleSearch(gunung);
 }
+
+document.getElementById("unifiedSearch").addEventListener("keydown", e => {
+  if (e.key === "Enter") handleSearch();
+});
+
+document.getElementById("toggleTheme").addEventListener("click", () => {
+  document.body.classList.toggle("light-mode");
+});
