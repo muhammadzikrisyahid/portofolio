@@ -16,6 +16,14 @@ body.light-mode {
   color: #111;
 }
 
+body {
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+#toggleTheme {
+  transition: background 0.3s ease;
+}
+
 #preloader {
   position: fixed;
   inset: 0;
@@ -31,7 +39,6 @@ body.light-mode {
 @keyframes fadeOut {
   to { opacity: 0; visibility: hidden; }
 }
-
 .main-header {
   background: #1b4332;
   padding: 1rem 2rem;
@@ -139,17 +146,51 @@ footer {
   background: #1b4332;
   color: white;
 }
+
+/* Hamburger menu styling */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Responsive behavior */
 @media (max-width: 768px) {
   .main-header {
     flex-direction: column;
     align-items: flex-start;
   }
+  nav {
+    display: none;
+    width: 100%;
+  }
+  nav.show {
+    display: block;
+  }
   nav ul {
     flex-direction: column;
     gap: 0.5rem;
   }
-  .gallery {
-    flex-direction: column;
-    align-items: center;
+  .hamburger {
+    display: block;
+    margin-top: 0.5rem;
   }
+  .search-container, .controls {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
+body {
+  font-family: 'Urbanist', sans-serif;
+  background: #0e1a1a;
+  color: #e0f2f1;
+  transition: all 0.3s ease;
+}
+body.light-mode {
+  background: #ffffff;
+  color: #111;
 }
