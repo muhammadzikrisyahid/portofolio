@@ -5,18 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RINTIS ARAH - Komunitas Pecinta Alam</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- Preloader -->
   <div id="preloader">
     <h1>RINTIS ARAH</h1>
     <p>Menemukan Arah Lewat Jejak</p>
   </div>
 
-  <!-- Header -->
   <header class="main-header">
     <h1 class="logo">RINTIS Arah</h1>
     <nav>
@@ -41,29 +37,11 @@
   </header>
 
   <main>
-    <!-- Visi Misi -->
     <section class="frame animate" id="beranda">
       <h2>Selamat Datang di Rintis Arah</h2>
       <p>Komunitas Pecinta Alam dan Pendaki Gunung</p>
-      <div class="visi-misi">
-        <div>
-          <h3>Visi</h3>
-          <p>Membangun ruang tumbuh dan pulang bagi jiwa-jiwa muda...</p>
-        </div>
-        <div>
-          <h3>Misi</h3>
-          <ul>
-            <li>Merawat alam adalah merawat diri</li>
-            <li>Perjalanan mencipta makna</li>
-            <li>Komunitas yang tulus dan tumbuh</li>
-            <li>Mengubah cerita menjadi gerak</li>
-            <li>Menjadi generasi yang peduli dan peka</li>
-          </ul>
-        </div>
-      </div>
     </section>
 
-    <!-- Info Dinamis -->
     <section class="frame animate" id="infoSection">
       <h2>Informasi Gunung</h2>
       <div id="mountainInfo"></div>
@@ -72,22 +50,20 @@
       <div id="transportResult"></div>
     </section>
 
-    <!-- Galeri -->
     <section class="frame animate" id="galeri">
       <h2>Galeri Gunung</h2>
       <div class="gallery">
-        <div class="gallery-item" onclick="openSlider('merbabu')">
+        <div class="gallery-item" onclick="searchFromGallery('merbabu')">
           <img src="images/merbabu/1.jpg" alt="Merbabu" />
           <p>Merbabu</p>
         </div>
-        <div class="gallery-item" onclick="openSlider('rinjani')">
+        <div class="gallery-item" onclick="searchFromGallery('rinjani')">
           <img src="images/rinjani/1.jpg" alt="Rinjani" />
           <p>Rinjani</p>
         </div>
       </div>
     </section>
 
-    <!-- Video -->
     <section class="frame animate" id="video">
       <h2>Video Dokumentasi</h2>
       <div class="video-container">
@@ -95,7 +71,6 @@
       </div>
     </section>
 
-    <!-- Cerita Pendakian -->
     <section class="frame animate" id="form-cerita">
       <h2>Bagikan Cerita Pendakianmu</h2>
       <form id="storyForm">
@@ -103,12 +78,6 @@
         <textarea placeholder="Ceritakan pengalaman mendakimu..." required></textarea>
         <button type="submit">Kirim Cerita</button>
       </form>
-    </section>
-
-    <!-- Map -->
-    <section class="frame animate">
-      <h2>Peta Lokasi Gunung</h2>
-      <div id="mapContainer"></div>
     </section>
   </main>
 
