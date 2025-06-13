@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RINTIS ARAH - Komunitas Pecinta Alam</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RINTIS Arah - Komunitas Pecinta Alam</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="preloader">
-    <h1>RINTIS ARAH</h1>
+    <h1>RINTIS Arah</h1>
     <p>Menemukan Arah Lewat Jejak</p>
   </div>
 
@@ -24,7 +26,7 @@
       </ul>
     </nav>
     <div class="search-container">
-      <input type="text" id="unifiedSearch" placeholder="Cari gunung, simaksi, cuaca..." />
+      <input type="text" id="unifiedSearch" placeholder="Cari gunung, simaksi, cuaca...">
       <button onclick="handleSearch()">🔍</button>
     </div>
     <div class="controls">
@@ -37,12 +39,12 @@
   </header>
 
   <main>
-    <section class="frame animate" id="beranda">
-      <h2>Selamat Datang di Rintis Arah</h2>
-      <p>Komunitas Pecinta Alam dan Pendaki Gunung</p>
+    <section class="frame" id="beranda">
+      <h2 data-i18n="welcome">Selamat Datang di Rintis Arah</h2>
+      <p data-i18n="community">Komunitas Pecinta Alam dan Pendaki Gunung</p>
     </section>
 
-    <section class="frame animate" id="infoSection">
+    <section class="frame" id="infoSection">
       <h2>Informasi Gunung</h2>
       <div id="mountainInfo"></div>
       <div id="simaksiResult"></div>
@@ -50,34 +52,33 @@
       <div id="transportResult"></div>
     </section>
 
-    <section class="frame animate" id="galeri">
+    <section class="frame" id="galeri">
       <h2>Galeri Gunung</h2>
       <div class="gallery">
-        <div class="gallery-item" onclick="searchFromGallery('merbabu')">
-          <img src="images/merbabu/1.jpg" alt="Merbabu" />
+        <div class="gallery-item" onclick="openSlider('merbabu')">
+          <img src="https://source.unsplash.com/160x100/?mountain" alt="Merbabu">
           <p>Merbabu</p>
         </div>
-        <div class="gallery-item" onclick="searchFromGallery('rinjani')">
-          <img src="images/rinjani/1.jpg" alt="Rinjani" />
-          <p>Rinjani</p>
-        </div>
       </div>
     </section>
 
-    <section class="frame animate" id="video">
+    <section class="frame" id="video">
       <h2>Video Dokumentasi</h2>
-      <div class="video-container">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-      </div>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
     </section>
 
-    <section class="frame animate" id="form-cerita">
+    <section class="frame" id="form-cerita">
       <h2>Bagikan Cerita Pendakianmu</h2>
       <form id="storyForm">
-        <input type="text" placeholder="Nama kamu" required />
+        <input type="text" placeholder="Nama kamu" required>
         <textarea placeholder="Ceritakan pengalaman mendakimu..." required></textarea>
         <button type="submit">Kirim Cerita</button>
       </form>
+    </section>
+
+    <section class="frame">
+      <h2>Peta Lokasi Gunung</h2>
+      <div id="mapContainer">[Map Placeholder]</div>
     </section>
   </main>
 
